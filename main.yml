@@ -1,0 +1,10 @@
+---
+- hosts: routers
+  connection: local
+  gather_facts: false
+
+  tasks:
+    - name: Configure Routers
+      ios_command:
+        commands:
+          - 
