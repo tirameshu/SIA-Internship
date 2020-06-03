@@ -5,6 +5,6 @@
 
   tasks:
     - name: Configure Routers
-      ios_command:
+      ios_config:
         commands:
           - 
