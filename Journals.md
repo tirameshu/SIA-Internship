@@ -73,3 +73,9 @@ A3:
 ## To Do
 - More research on using EVE
 - Reserve some free IP addresses for my own use and try to connect to them
+
+# 5 June
+
+## Questions
+### Q1: How to access the SharePoint spreadsheet of IP addresses
+
