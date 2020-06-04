@@ -38,8 +38,7 @@ A1: As above
 
 ### Q2: Do layer 2 switches only an IP address for management purpose, and does not associate any IP address with each port?
 - So if a layer 2 switch has multiple VLANs, each VLAN is not accessible over the network (because they have no IP address), but can be accessed via layer 3 switch VLAN interfaces?
-- Does each device in the VLAN under a layer 2 switch have their own IP address, under the same subnet, 
-![inter-vlan routing](https://files.mtstatic.com/site_5814/307/0?Expires=1591276021&Signature=jU14Wz-BbN7Ubi7klTV4BVLT1vgDQ~G0l~X-lAbNJxPSuqhCMCQ5dspEAnQJv2WGt5MK3Wd2M1x~91BuekdOMykTnNEpyIuSK3VLje4gVRjKpr3~upBP6dEHJ5~u5VZ6e-0qoZIP6NudsQhrSxJYCkN0JcKoZHxXBe0~pzOa3Uw_&Key-Pair-Id=APKAJ5Y6AV4GI7A555NA)
+- Does each device in the VLAN under a layer 2 switch have their own IP address, under the same subnet? (Refer to https://documentation.meraki.com/MS/Layer_3_Switching/Layer_3_vs_Layer_2_Switching)
 
 A2:
 
