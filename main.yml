@@ -5,7 +5,9 @@
   gather_facts: false
 
   tasks:
-    - name: Configure Routers
+    - name: Configuring Routers
       ios_config:
         commands:
-          - 
+          - enable secret {{ password }}
+          - interface gigabitethernet {{ item.slot_port }}
+          - ip address {{ item.ip }} {{ ip.subnet_mask }}
