@@ -1,25 +1,51 @@
 # 4 June
 
 ## Accomplishments
-- Based on GNS3 tutorials and Cisco Basic Router Configuration Guide, added some `ios_config` commands to playbook.
-- Learnt about EVE Topology Lab usage.
-- Learnt about switches and VLANs.
+1. Based on GNS3 tutorials and Cisco Basic Router Configuration Guide, added some `ios_config` commands to playbook.
+2. Learnt about EVE Topology Lab usage.
+    - ping the desired addr for VLAN. If unreachable --> not taken.
+3. Learnt about switches and VLANs.
+    - VLAN
+        - a subnet in a switch, which by default is just 1 subnet
     - Layer 2 switches:
-        - packets are sent to a specific switch port based on destination *MAC addresses*
+        - used at Access layer --> directly connected to PC/ server, which have their own IP addresses
+        - packets are sent to a specific switch port (*layer 2 ports*) based on destination *MAC addresses*
         - can assign VLANs to specific switch ports, which could be in different layer 3 subnets
-            - each subnet reachable by IP addresses
             - so different layer 3 networks can share the same layer 2 infrastructure
+            - however, the layer 3 subnets are **assigned by layer 3 switches**, and the only IP addresses associated with layer 2 swtiches are the addresses of the devices in their VLAN
         - uses MAC address
-        - cannot be routed
     - Layer 3 switches:
         - a switch that can perform routing
+        - has both *interface VLAN* as well as normal VLAN
+            - basically a routable interface, each can be assigned an IP address
+            - reachable over the network
         - requires a default gateway to connect to remote subnets
-
+4. General connection procedures
+    - PC -> switch:
+        - ssh into switch with switch ip/ hostname
+        - run commands
+    - Ansible -> switch (in same subnet):
+        - Ansible will ssh into switch instead
+            - if switch is in the same subnet, no routing is needed
+        - switch IP would be described in host file
+        - run commands with Playbook
+- EVE usage
+    - only use 1 "Network" component for connection
+    
 ## Questions
-Q1: Lab usage
+### Q1: Lab usage
 A1: As above
 
-Q2: Diagram to check for understanding of VLAN and switches.
+### Q2: Do layer 2 switches only an IP address for management purpose, and does not associate any IP address with each port?
+- So if a layer 2 switch has multiple VLANs, each VLAN is not accessible over the network (because they have no IP address), but can be accessed via layer 3 switch VLAN interfaces?
+- Does each device in the VLAN under a layer 2 switch have their own IP address, under the same subnet, 
+![inter-vlan routing](https://files.mtstatic.com/site_5814/307/0?Expires=1591276021&Signature=jU14Wz-BbN7Ubi7klTV4BVLT1vgDQ~G0l~X-lAbNJxPSuqhCMCQ5dspEAnQJv2WGt5MK3Wd2M1x~91BuekdOMykTnNEpyIuSK3VLje4gVRjKpr3~upBP6dEHJ5~u5VZ6e-0qoZIP6NudsQhrSxJYCkN0JcKoZHxXBe0~pzOa3Uw_&Key-Pair-Id=APKAJ5Y6AV4GI7A555NA)
+
+A2:
+
+### Q3: Is layer 2 switch sufficient for Ansible -> switch connection, if they are in the same subnet?
+- Or if they are not in the same subnet, then Ansible cannot directly connect to a layer 2 switch?
+A3:
 
 ## To Do
 - More research on using EVE
