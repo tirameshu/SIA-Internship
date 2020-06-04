@@ -1,3 +1,25 @@
+# 3 June
+
+## Plan 
+- Use variable names router_1, router_2 to refer to the routers, without specifying their IP addresses first.
+- Use iso_config (Ansible network module) on routers
+
+
+## Questions
+- Are the files /etc/hosts, /etc/ansible/* for public usage? Is is safe for me to edit?
+	- Let Abhay know before editing
+
+- I am unable to connect to CheckPoint VPN, I also forgot what it is used for.
+	- Office work, connect with PIN + RSA
+
+- CCNA lab shared with me, not sure how to derive specific IP addresses of devices from the range of IP addresses given as 192.168.11.0/24 Transit LAN.
+	- Abhay will explain lab to me.
+
+- Is it possible/ advisable for me to log into the company email from phone? Exchange server says unable to verify account.
+	- MDM, will set up.
+
+- Are the files I'm uploading onto BitBucket are ok, do they contain sensitive info, etc..
+
 # 4 June
 
 ## Accomplishments
@@ -45,6 +67,8 @@ A2:
 ### Q3: Is layer 2 switch sufficient for Ansible -> switch connection, if they are in the same subnet?
 - Or if they are not in the same subnet, then Ansible cannot directly connect to a layer 2 switch?
 A3:
+
+### Q4: Are the files I'm uploading onto BitBucket are ok, do they contain sensitive info, etc..
 
 ## To Do
 - More research on using EVE
