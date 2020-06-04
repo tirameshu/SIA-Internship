@@ -1,0 +1,22 @@
+= 4 June =
+
+== Accomplishments ==
+- based on GNS3 tutorials and Cisco Basic Router Configuration Guide, added some `ios_config` commands to playbook.
+- learnt about EVE Topology Lab usage.
+- learnt about switches and VLANs.
+    - Layer 2 switches:
+        - packets are sent to a specific switch port based on destination *MAC addresses*
+        - can assign VLANs to specific switch ports, which could be in different layer 3 subnets
+            - each subnet reachable by IP addresses
+            - so different layer 3 networks can share the same layer 2 infrastructure
+        - uses MAC address
+        - cannot be routed
+    - Layer 3 switches:
+        - a switch that can perform routing
+        - requires a default gateway to connect to remote subnets
+
+== Questions ==
+Q1: lab usage
+A1: answer as above
+
+== To Do ==
