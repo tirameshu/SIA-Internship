@@ -5,9 +5,11 @@
   gather_facts: false
 
   tasks:
-    - name: Configuring Routers
-      ios_config:
-        commands:
-          - enable secret {{ password }}
-          - interface gigabitethernet {{ item.slot_port }}
-          - ip address {{ item.ip }} {{ ip.subnet_mask }}
+    - name: Merging with existing config
+      ios_vlans:
+        config:
+          - name: Vlan_20
+          - vlan_id: 20
+          - state: active
+          - shutdown: enabled
+        state: merged
