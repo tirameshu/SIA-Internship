@@ -22,7 +22,7 @@
 
 # 4 June
 
-## Accomplishments
+## Learnings
 1. Based on GNS3 tutorials and Cisco Basic Router Configuration Guide, added some `ios_config` commands to playbook.
 2. Learnt about EVE Topology Lab usage.
     - ping the desired addr for VLAN. If unreachable --> not taken.
@@ -66,9 +66,10 @@ A2:
 
 ### Q3: Is layer 2 switch sufficient for Ansible -> switch connection, if they are in the same subnet?
 - Or if they are not in the same subnet, then Ansible cannot directly connect to a layer 2 switch?
-A3:
+A3: Yes
 
 ### Q4: Are the files I'm uploading onto BitBucket are ok, do they contain sensitive info, etc..
+A4: Ok
 
 ## To Do
 - More research on using EVE
@@ -76,6 +77,30 @@ A3:
 
 # 5 June
 
+## Learnings
+- Router Configurations
+    - hostname
+    - enter `int vlan` to configure ip address and `no shutdown`
+    - ssh
+        - since ansible needs to ssh into switch, needs to configure ssh on switch itself, which involves creating username and password
+    - vty 0 4
+        - virtual port to control inbound telnet connections
+    - ip domain-name [ansible]
+    - crypto key generate rsa
+    - layer 3
+        - needs layer 2 to work
+    - IP assignment
+        - if VLAN has DHCP, it will assign IP
+        - if not, have to look for central DHCP (outside subnet, via gateway) to assign
+            - can be too expensive to have 1 DHCP per VLAN
+    - connection type
+        - local: Ansible connects to devices via local modules
+        - specific direct connections, eg paramiko: Ansible connects to device directly
+
 ## Questions
 ### Q1: How to access the SharePoint spreadsheet of IP addresses
 
+### Q2: How to access variables outside current yml?
+
+## To Do
+- Find out more about router configuration, as well as switches

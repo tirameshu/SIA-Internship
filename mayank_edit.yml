@@ -6,7 +6,8 @@
 
   tasks:
     - name: Global config settings
-      ios_config:
-        command:
-          - vtp mode transparent
-          - spanning-tree mode rapid-pvst
+      ios_command:
+        commands:
+          - conf t
+          - {{command_1}}
+          - {{command_2}}
