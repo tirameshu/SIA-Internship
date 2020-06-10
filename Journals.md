@@ -94,11 +94,14 @@ A4: Ok
         - to facilitate ansible ssh into switch
         
     5. Inbound connections
-        `line vty 0 4`
+    
+        5.1 `line vty 0 4`
         
             - device can allow 5 simultaneous virtual connections which may be Telnet or SSH
-        `transport input all`
-        `login local`
+            
+        5.2 `transport input all`
+        
+        5.3 `login local`
         
     6. `ip domain-name ansibleautomation.com`
     
