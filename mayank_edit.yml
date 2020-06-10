@@ -3,6 +3,9 @@
   hosts: routers
   connection: local
   gather_facts: false
+  
+  vars_files:
+  - vars
 
   tasks:
     - name: Global config settings
