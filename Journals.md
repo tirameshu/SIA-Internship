@@ -101,6 +101,15 @@ A4: Ok
 ### Q1: How to access the SharePoint spreadsheet of IP addresses
 
 ### Q2: How to access variables outside current yml?
+- `vars_files` for general variables, `hostfile` for host variables
 
 ## To Do
 - Find out more about router configuration, as well as switches
+
+# 10 June
+
+## Questions
+
+### Q1: What to do with `command timeout`?
+
+### Q2: Any bugs with my existing playbooks?
