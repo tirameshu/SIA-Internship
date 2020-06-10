@@ -128,8 +128,18 @@ A4: Ok
 
 # 10 June
 
+## Learning
+- Information like `remote_user` and `ansible_become_pass` (under vars) can be included  under hostfile vars, and ansible will retrieve them automatically.
+- Basic config file to work on any new switch, requires checking.
+
 ## Questions
 
 ### Q1: What to do with `command timeout`?
 
 ### Q2: Any bugs with my existing playbooks?
+
+### Q3: Email: bitbucket https cutover??
+
+## To Do
+- Try different users and permissions on BitBucket
+- Use playbooks on multiple hosts
