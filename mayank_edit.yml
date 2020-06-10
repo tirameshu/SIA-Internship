@@ -1,16 +1,19 @@
 ---
 - name: CCNA Lab tasks
   hosts: routers
-  connection: local
+  connection: 
+    network_cli: 
+      ansible_user: {{ username }}
+      ansible_password: {{ password }}
   gather_facts: false
   
   vars_files:
   - vars
 
   tasks:
-    - name: Global config settings
+    - name: global config settings
       ios_command:
         commands:
           - conf t
-          - {{command_1}}
-          - {{command_2}}
+          - {{ command_1 }}
+          - {{ command_2 }}
