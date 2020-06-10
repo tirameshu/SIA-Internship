@@ -62,7 +62,7 @@ A1: As above
 - So if a layer 2 switch has multiple VLANs, each VLAN is not accessible over the network (because they have no IP address), but can be accessed via layer 3 switch VLAN interfaces?
 - Does each device in the VLAN under a layer 2 switch have their own IP address, under the same subnet? (Refer to https://documentation.meraki.com/MS/Layer_3_Switching/Layer_3_vs_Layer_2_Switching)
 
-A2:
+A2: should be yes
 
 ### Q3: Is layer 2 switch sufficient for Ansible -> switch connection, if they are in the same subnet?
 - Or if they are not in the same subnet, then Ansible cannot directly connect to a layer 2 switch?
@@ -79,23 +79,43 @@ A4: Ok
 
 ## Learnings
 - Router Configurations
-    - hostname
-    - enter `int vlan` to configure ip address and `no shutdown`
-    - ssh
-        - since ansible needs to ssh into switch, needs to configure ssh on switch itself, which involves creating username and password
-    - vty 0 4
-        - virtual port to control inbound telnet connections
-    - ip domain-name [ansible]
-    - crypto key generate rsa
-    - layer 3
-        - needs layer 2 to work
-    - IP assignment
-        - if VLAN has DHCP, it will assign IP
-        - if not, have to look for central DHCP (outside subnet, via gateway) to assign
-            - can be too expensive to have 1 DHCP per VLAN
-    - connection type
-        - local: Ansible connects to devices via local modules
-        - specific direct connections, eg paramiko: Ansible connects to device directly
+    1. `conf t`
+    
+    2. `hostname [swtich name]`
+    
+    3. `int vlan [n]`
+    
+        3.1 `ip addr [addr] [subnet]`
+        
+        3.2 `no shutdown`
+        
+    4. `username [username] password [password] privilege [privilege]`
+    
+        - to facilitate ansible ssh into switch
+        
+    5. Inbound connections
+    
+        5.1 `line vty 0 4`
+        
+            - device can allow 5 simultaneous virtual connections which may be Telnet or SSH
+            
+        5.2 `transport input all`
+        
+        5.3 `login local`
+        
+    6. `ip domain-name ansibleautomation.com`
+    
+    7. `crypto key generate rsa`
+    
+- Layer 3
+    - needs layer 2 to work
+- IP assignment
+    - if VLAN has DHCP, it will assign IP
+    - if not, have to look for central DHCP (outside subnet, via gateway) to assign
+        - can be too expensive to have 1 DHCP per VLAN
+- Connection type
+    - local: Ansible connects to devices via local modules
+    - specific direct connections, eg paramiko: Ansible connects to device directly
 
 ## Questions
 ### Q1: How to access the SharePoint spreadsheet of IP addresses
