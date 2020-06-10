@@ -1,0 +1,4 @@
+---
+- commands:
+    command_1: vlan 12
+    command_2: name vlan12
