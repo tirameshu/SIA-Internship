@@ -11,7 +11,7 @@
   - vars.yml
 
   tasks:
-    - name: global config settings
+    - name: 2 command configurations
       ios_command:
         commands:
           - conf t
