@@ -12,5 +12,5 @@
       ios_command:
         commands:
           - conf t
-          - {{command_1}}
-          - {{command_2}}
+          - {{ command_1 }}
+          - {{ command_2 }}
