@@ -79,6 +79,11 @@ A4: Ok
 
 ## Learnings
 - Router Configurations
+    - first ping the host to see if router can go thru network
+    - then ping router from host to see if can reach
+    - set up ssh (rsa fingerprint) before trying to reach
+    - write config before logging out
+    
     1. `conf t`
     
     2. `hostname [swtich name]`
