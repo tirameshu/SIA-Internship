@@ -2,9 +2,6 @@
 - name: CCNA Lab tasks
   hosts: routers
   connection: local
-  remote_user: "{{ username }}"
-  vars:
-    ansible_become_pass: "{{ password }}"
   gather_facts: false
   
   vars_files:
