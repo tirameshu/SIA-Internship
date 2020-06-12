@@ -119,7 +119,7 @@ A4: Ok
     - if not, have to look for central DHCP (outside subnet, via gateway) to assign
         - can be too expensive to have 1 DHCP per VLAN
 - Connection type
-    - local: Ansible connects to devices via local modules
+    - local: Ansible connects to devices via local modules, not copy modules to device.
     - specific direct connections, eg paramiko: Ansible connects to device directly
 
 ## Questions
