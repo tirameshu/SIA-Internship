@@ -158,3 +158,10 @@ A4: Ok
 5. Connected to 2 EVE switches via playbooks
 6. On chapter 8 of Juniper course
 7. Have been taking notes for the course
+
+## Future To-Dos
+- pass exam and get cert
+- understand how other companies do pipeline
+- 50 playbooks
+- final deliverable to contribute to company
+- governance, workflow: document, comment, research?
