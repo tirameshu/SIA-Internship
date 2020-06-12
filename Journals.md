@@ -148,3 +148,13 @@ A4: Ok
 ## To Do
 - Try different users and permissions on BitBucket
 - Use playbooks on multiple hosts
+
+# 12 June Summary
+
+1. Read about layer 2 and 3 switches
+2. Configured switches on EVE lab, including understanding the basic configurations needed for switch to be connectable from Ansible engine.
+3. Wrote static playbooks
+4. Wrote dynamic playbooks that initially just take in variable commands, later used hostfile variables as well for automatic login.
+5. Connected to 2 EVE switches via playbooks
+6. On chapter 8 of Juniper course
+7. Have been taking notes for the course
