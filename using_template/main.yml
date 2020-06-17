@@ -1,0 +1,8 @@
+---
+- name: CCNA Lab tasks
+  hosts: routers
+  connection: local
+  gather_facts: false
+
+  roles:
+    - routers
