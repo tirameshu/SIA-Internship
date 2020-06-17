@@ -165,3 +165,24 @@ A4: Ok
 - 50 playbooks
 - final deliverable to contribute to company
 - governance, workflow: document, comment, research?
+
+# 16 June
+
+## Learnings
+
+### Jinja
+
+- Imperative, give specific commands step by step
+- Use three directories: tasks, templates, vars
+- Used to write custom modules
+    - Some devices are legacy/ modules don't exist for the device/ not ready to use the existing declarative methods.
+    
+## To Do
+- Write a playbook with Jinja template
+
+# 17 June
+
+## Learnings
+- Used Jinja template for existing playbook
+- Wrote more playbooks for configurations
+- Attempted Jinja inheritance
