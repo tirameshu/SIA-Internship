@@ -1,10 +1,23 @@
 ---
-- commands:
-    command_1: vlan 12
-    command_2: name vlan12
-
-- switch2:
-    hostname: switch2
-    vlan: 2
-    domain: ansibleautomation.com
+switches:
+  - hostname: switch1
+    vlans:
+      - number: 1
+        name: 
+        ip: 10.180.0.252
+        subnet: 255.255.255.0
+      - number: 2
+        name: mandy
+        ip: 192.168.1.1
+        subnet: 255.255.255.0
+  - hostname: switch2
+    vlans:
+      - number: 1
+        name: default
+        ip: 10.180.0.253
+        subnet: 255.255.255.0
+      - number: 12
+        name: vlan12
+        ip: 
+        subnet: 
     

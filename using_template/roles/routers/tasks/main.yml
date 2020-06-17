@@ -1,14 +1,6 @@
 ---
-- name: Configure routers
-  template: src=template.j2 dest={{ item.hostname }} # functions to call
-  with_items: {{ commmands }} # in vars.yml
-
-  tasks:
-    - name: 2 command configurations
-      ios_command:
-        commands:
-          - conf t
-          - "{{ item.command_1 }}"
-          - "{{ item.command_2 }}"
-      with_items:
-      - "{{ commands }}"
+- name: Configure switches
+  template: 
+    src=template.j2
+    dest={{ item.hostname }} # functions to call
+  with_items: "{{ switches }}" # in vars.yml
