@@ -3,10 +3,16 @@
   hosts: routers
   connection: local
   gather_facts: false
+  
+  vars_files:
+  - vars.yml
 
   tasks:
-    - name: Global config settings
-      ios_config:
-        command:
-          - vtp mode transparent
-          - spanning-tree mode rapid-pvst
+    - name: 2 command configurations
+      ios_command:
+        commands:
+          - conf t
+          - "{{ item.command_1 }}"
+          - "{{ item.command_2 }}"
+      with_items:
+      - "{{ commands }}"
