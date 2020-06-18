@@ -1,5 +1,5 @@
 ---
-switches:
+routers:
   - hostname: router1
     vlans:
       - number: 1
