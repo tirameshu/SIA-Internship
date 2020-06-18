@@ -1,6 +1,6 @@
 ---
 switches:
-  - hostname: switch1
+  - hostname: router1
     vlans:
       - number: 1
         name: 
@@ -10,7 +10,7 @@ switches:
         name: mandy
         ip: 192.168.1.1
         subnet: 255.255.255.0
-  - hostname: switch2
+  - hostname: router2
     vlans:
       - number: 1
         name: default
