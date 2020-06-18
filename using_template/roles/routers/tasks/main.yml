@@ -3,4 +3,4 @@
   template: 
     src=template.j2
     dest={{ item.hostname }} # functions to call
-  with_items: "{{ switches }}" # in vars.yml
+  with_items: "{{ routers }}" # in vars.yml
