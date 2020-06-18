@@ -20,4 +20,5 @@ routers:
         name: vlan12
         ip: 
         subnet: 
-    
+commands:
+  - command1: no vlan 13

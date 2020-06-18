@@ -1,0 +1,3 @@
+---
+- commands:
+    command1: no vlan 13
