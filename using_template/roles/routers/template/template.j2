@@ -1,7 +1,9 @@
-Configuring {{ item.hostname }}
+conf t
+!
 !
 {% for vlan in item.vlans %}}
-conf t
-  vlan {{ vlan.number }}
-  name {{ vlan.name | upper }}
+  no vlan 12
+  !
 {% endfor %}}
+!
+!
