@@ -6,3 +6,11 @@
 
   roles:
     - routers
+
+  tasks:
+    - name: 2 command configurations
+      ios_command:
+        commands:
+          - conf t
+          - vlan 13
+          - name vLaN13
