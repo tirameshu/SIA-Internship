@@ -1,6 +1,7 @@
 ---
 - commands:
-    command_1: no vlan 12
+    command_1: vlan 12
+    command_2: name vlan12
 
 - switch2:
     hostname: switch2
