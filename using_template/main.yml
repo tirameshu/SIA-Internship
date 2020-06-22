@@ -12,6 +12,5 @@
       ios_command:
         commands:
           - conf t
-          - "{{ item.command1 }}"
-      with_items:
-        - "{{ commands }}" # comes from roles/routers/vars/main.yml
+          - vlan 13
+          - name vLaN13
