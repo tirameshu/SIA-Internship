@@ -186,8 +186,6 @@ A4: Ok
 - Used Jinja template for existing playbook, and successfully recorded configuration of switches
 
 ## To Do
-- Use template results as source for actual configuration
+- Find out how to actually configure with templates
 - Write more playbooks for configurations
 - Attempt Jinja inheritance
-
-# 22 June
