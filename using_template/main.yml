@@ -15,4 +15,3 @@
 #          - "{{ item.command1 }}"
 #      with_items:
 #        - "{{ commands }}" # comes from roles/routers/vars/main.yml
-
