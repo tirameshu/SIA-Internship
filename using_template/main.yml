@@ -6,12 +6,12 @@
 
   roles:
     - routers
-#
-#  tasks:
-#    - name: 2 command configurations
-#      ios_command:
-#        commands:
-#          - conf t
-#          - "{{ item.command1 }}"
-#      with_items:
-#        - "{{ commands }}" # comes from roles/routers/vars/main.yml
+
+  tasks:
+    - name: 2 command configurations
+      ios_command:
+        commands:
+          - conf t
+          - "{{ item.command1 }}"
+      with_items:
+        - "{{ commands }}" # comes from roles/routers/vars/main.yml
