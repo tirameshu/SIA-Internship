@@ -190,4 +190,13 @@ A4: Ok
 - Write more playbooks for configurations
 - Attempt Jinja inheritance
 
-# 22 June
+# 24 June
+
+## Learnings
+### Command, Shell, Raw
+- `command`: executes command in the *same shell* as the other tasks
+- `shell`: executes command in *new shell*, for more complex commands like using pipes
+- `raw`: executes *low level* commands where interpreter is missing on target host
+
+## Questions
+### Q1: Why is raw used in 1.yml, does the host not have the interpreter?
