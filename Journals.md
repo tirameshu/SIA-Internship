@@ -206,3 +206,12 @@ A4: Ok
 Yes
 
 ### Q2: Are the extra variables in a mapping custom attributes?
+
+## Future To-Dos
+- Bring playbooks to BitBucker
+- Integrate BitBucket with Ansible Tower
+- Webhook to MS Teams
+
+# 25 June
+## Learnings
+- send output from lab playbooks to ms teams
