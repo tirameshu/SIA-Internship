@@ -203,5 +203,6 @@ A4: Ok
 
 ## Questions
 ### Q1: Why is raw used in 1.yml, does the host not have the interpreter?
+Yes
 
 ### Q2: Are the extra variables in a mapping custom attributes?
