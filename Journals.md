@@ -198,5 +198,8 @@ A4: Ok
 - `shell`: executes command in *new shell*, for more complex commands like using pipes
 - `raw`: executes *low level* commands where interpreter is missing on target host
 
+### Playbooks
+- learnt to use debug with message, finding out that `var=` requires a defined variable.
+
 ## Questions
 ### Q1: Why is raw used in 1.yml, does the host not have the interpreter?
