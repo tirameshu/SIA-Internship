@@ -1,0 +1,9 @@
+---
+- hosts: host
+  connection: local
+  gather_facts: no
+  tasks:
+    - name: Notifying MS Teams
+      office_365_connector_card:
+        webhook: "{{ webhook_url }}"
+        text: "{{ msg }}"
