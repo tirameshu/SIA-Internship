@@ -1,0 +1,35 @@
+---
+- hosts: f5
+  connection: paramiko
+  gather_facts: False
+  tasks:
+    - name: Show System Perfomance Usage
+      raw: 
+#        "show sys performance"
+        "show sys hardware"
+      register: sys_output
+    - debug: var=sys_output.stdout_lines
+    
+    - name: Register dummy host with variable
+      add_host:
+        name: "DUMMY_HOST"
+        sys_performance_new: "{{sys_output.stdout}}"
+    
+- hosts: local_host
+  connection: local
+  gather_facts: False
+  tasks:
+    - name: to ms teams
+      office_365_connector_card:
+        webhook: "{{ webhook_url_abhay }}"
+        text: "{{ hostvars['DUMMY_HOST']['sys_performance_new'] }}"
+
+
+
+#    - name: Sending message to room 
+#      cisco_spark:
+#        recipient_type: roomId
+#        recipient_id: Y2lzY29zcGFyazovL3VzL1JPT00vZjViMWMwNDAtYmVjMi0xMWU4LWE2YjctN2IzZDA4NWRlMWU1
+#        message_type: text
+#        personal_token: ZWE3MTEzOTctMjZiZS00YWMxLWIwNjctMjcxODk4Mzk4NmFiNTczODE5NDItMGQy_PF84_c535a0c6-e613-4525-aa7e-58d962557c36
+#        message: "{{ hostvars['DUMMY_HOST']['sys_performance_new'] }}"

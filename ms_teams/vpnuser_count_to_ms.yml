@@ -1,0 +1,28 @@
+---
+- hosts: cp
+  connection: paramiko
+  gather_facts: False
+  tasks:
+    - name: Show VPN Users Concurrency 
+      raw: "fw tab -t userc_users -s"
+      register: vpnuser
+    - debug: var=vpnuser.stdout
+    
+    - name: Register dummy host with variable
+      add_host:
+        name: "DUMMY_HOST"
+        vpnuser_new: "{{vpnuser.stdout}}"
+    
+- hosts: local_host
+  connection: local
+  gather_facts: False
+  tasks:
+    - name: Sending message to MS Teams
+      office_365_connector_card:
+        webhook: "{{ webhook_url_mandy }}"
+        text: "{{ hostvars['DUMMY_HOST']['vpnuser_new'] }}"
+
+    - name: Sending hostname to room 
+      office_365_connector_card:
+        webhook: "{{ webhook_url_mandy }}"
+        message: " hostname "

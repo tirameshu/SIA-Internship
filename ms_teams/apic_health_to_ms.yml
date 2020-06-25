@@ -1,0 +1,24 @@
+---
+- hosts: apic
+  connection: paramiko
+  gather_facts: False
+  tasks:
+    - name: Show APIC Controller Health Status 
+      raw: "bash"
+      raw: "show controller"
+      register: controller
+    - debug: var=controller.stdout
+    
+    - name: Register dummy host with variable
+      add_host:
+        name: "DUMMY_HOST"
+        controller_new: "{{controller.stdout}}"
+    
+- hosts: local_host
+  connection: local
+  gather_facts: False
+  tasks:
+    - name: Sending message to room 
+      office_365_connector_card:
+        webhook: "{{ webhook_url_mandy }}"
+        message: "{{ hostvars['DUMMY_HOST']['controller_new'] }}"
