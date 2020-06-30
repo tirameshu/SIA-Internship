@@ -1,23 +1,29 @@
 ---
-- hosts: f5
-  connection: paramiko
+- name: Obtain System Information with Pool
+  hosts: f5
+  connection: local
   gather_facts: False
+
   tasks:
-    - name: Show System Perfomance Usage
-      raw: 
-        "{{ item }}"
-      with_items:
-        - "show sys performance"
-        - "show sys hardware"
+    - name: Get sys_output from device with pool
+      bigip_pool:
+        provider:
+          server: "{{ inventory_hostname }}"
+          user: "{{ ansible_user }}"
+          password: "{{ ansible_password }}"
+          validate_certs: no
+        commands:
+          - "show sys performance"
+          - "show sys hardware"
       register: sys_output
     - debug: var=sys_output
-    
+
     - name: Register dummy host with variable
       add_host:
         name: "DUMMY_HOST"
         sys_performance: "{{sys_output.results[0].stdout_lines}}"
         sys_hardware: "{{ sys_output.results[1].stdout_lines }}"
-    
+
 - hosts: local_host
   connection: local
   gather_facts: False
@@ -31,13 +37,3 @@
       office_365_connector_card:
         webhook: "{{ webhook_url_mandy}}"
         text: "System Hardware: \n {{ hostvars['DUMMY_HOST']['sys_hardware']}}"
-
-
-
-#    - name: Sending message to room 
-#      cisco_spark:
-#        recipient_type: roomId
-#        recipient_id: Y2lzY29zcGFyazovL3VzL1JPT00vZjViMWMwNDAtYmVjMi0xMWU4LWE2YjctN2IzZDA4NWRlMWU1
-#        message_type: text
-#        personal_token: ZWE3MTEzOTctMjZiZS00YWMxLWIwNjctMjcxODk4Mzk4NmFiNTczODE5NDItMGQy_PF84_c535a0c6-e613-4525-aa7e-58d962557c36
-#        message: "{{ hostvars['DUMMY_HOST']['sys_performance_new'] }}"
