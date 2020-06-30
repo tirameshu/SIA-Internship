@@ -1,12 +1,12 @@
 ---
-- name: Obtain System Information with Pool
+- name: Obtain System Information with bigip_command
   hosts: f5
   connection: local
   gather_facts: False
 
   tasks:
-    - name: Get sys_output from device with pool
-      bigip_pool:
+    - name: Get sys_output from device with bigip_command
+      bigip_command:
         provider:
           server: "{{ inventory_hostname }}"
           user: "{{ ansible_user }}"
