@@ -215,3 +215,12 @@ Yes
 # 25 June
 ## Learnings
 - send output from lab playbooks to ms teams
+
+# 30 June
+## Learnings
+### RO playbook
+- Automatically fetches information from critical devicees
+- Entity team tracks the devices and their relevant information
+
+### Raw
+- To run multiple `raw` commands, pass them together under a single variable "{{ commands }}"
