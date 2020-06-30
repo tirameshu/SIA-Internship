@@ -21,8 +21,8 @@
     - name: Register dummy host with variable
       add_host:
         name: "DUMMY_HOST"
-        sys_performance: "{{sys_output.stdout_lines[0][0]}}"
-        sys_hardware: "{{ sys_output.stdout_lines[1][0] }}"
+        sys_performance: "{{ sys_output.stdout_lines[0] | join('\n') }}"
+        sys_hardware: "{{ sys_output.stdout_lines[1] } join('\n') }}"
 
 - hosts: local_host
   connection: local
@@ -32,11 +32,9 @@
     - name: Sending sys perf to ms teams
       office_365_connector_card:
         webhook: "{{ webhook_url_mandy}}"
-        text: "{{ item }}"
-      with_items:
-        - "{{ hostvars['DUMMY_HOST']['sys_performance'] }}"
+        text: "{{ hostvars['DUMMY_HOST']['sys_performance'] }}"
 
     - name: Sending sys hardware to ms teams
       office_365_connector_card:
         webhook: "{{ webhook_url_mandy}}"
-        text: "System Hardware: \n {{ hostvars['DUMMY_HOST']['sys_hardware'] | to_nice_json }}"
+        text: " {{ hostvars['DUMMY_HOST']['sys_hardware'] }}"
