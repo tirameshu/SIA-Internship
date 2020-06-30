@@ -28,12 +28,15 @@
   connection: local
   gather_facts: False
   tasks:
-    - name: sys perf to ms teams
+
+    - name: Sending sys perf to ms teams
       office_365_connector_card:
         webhook: "{{ webhook_url_mandy}}"
-        text: "System Performance: \n {{ hostvars['DUMMY_HOST']['sys_performance'] | split(',') | join('\n') }}"
+        text: "{{ item }}"
+      with_items:
+        - "{{ hostvars['DUMMY_HOST']['sys_performance'] }}"
 
-    - name: sys hardware to ms teams
+    - name: Sending sys hardware to ms teams
       office_365_connector_card:
         webhook: "{{ webhook_url_mandy}}"
         text: "System Hardware: \n {{ hostvars['DUMMY_HOST']['sys_hardware'] | to_nice_json }}"
