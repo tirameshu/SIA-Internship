@@ -28,7 +28,7 @@
   connection: local
   gather_facts: False
   tasks:
-    - debug: var=sys_performance
+    - debug: var=hostvars['DUMMY_HOST']['sys_performance']
 
 #    - name: Sending sys perf to ms teams
 #      office_365_connector_card:
