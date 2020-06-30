@@ -16,13 +16,14 @@
           - "show sys performance"
           - "show sys hardware"
       register: sys_output
-    - debug: var=sys_output
+    - debug: var="{{ item }}"
+      with_dict: sys_output
 
     - name: Register dummy host with variable
       add_host:
         name: "DUMMY_HOST"
-        sys_performance: "{{sys_output.stdout_lines}}"
-        sys_hardware: "{{ sys_output.stdout_lines }}"
+        sys_performance: "{{sys_output.stdout_lines[0][0]}}"
+        sys_hardware: "{{ sys_output.stdout_lines[1][0] }}"
 
 - hosts: local_host
   connection: local
@@ -31,9 +32,9 @@
     - name: sys perf to ms teams
       office_365_connector_card:
         webhook: "{{ webhook_url_mandy}}"
-        text: "System Performance: \n {{ hostvars['DUMMY_HOST']['sys_performance'] }}"
+        text: "System Performance: \n {{ hostvars['DUMMY_HOST']['sys_performance'] | to_nice_json }}"
 
     - name: sys hardware to ms teams
       office_365_connector_card:
         webhook: "{{ webhook_url_mandy}}"
-        text: "System Hardware: \n {{ hostvars['DUMMY_HOST']['sys_hardware']}}"
+        text: "System Hardware: \n {{ hostvars['DUMMY_HOST']['sys_hardware'] | to_nice_json }}"
