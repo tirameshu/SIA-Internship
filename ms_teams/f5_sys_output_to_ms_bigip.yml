@@ -16,7 +16,7 @@
           - "show sys performance"
           - "show sys hardware"
       register: sys_output
-    - debug: var=sys_otput
+    - debug: var=sys_output
 
     - name: Register dummy host with variable
       add_host:
@@ -31,7 +31,7 @@
     - name: sys perf to ms teams
       office_365_connector_card:
         webhook: "{{ webhook_url_mandy}}"
-        text: "System Performance: \n {{ hostvars['DUMMY_HOST']['sys_performance'] | to_nice_json }}"
+        text: "System Performance: \n {{ hostvars['DUMMY_HOST']['sys_performance'] | split(',') | join('\n') }}"
 
     - name: sys hardware to ms teams
       office_365_connector_card:
