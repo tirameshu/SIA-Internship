@@ -4,7 +4,7 @@
   gather_facts: False
   tasks:
     - name: Show System Perfomance Usage
-      raw: 
+      raw:
         "{{ item }}"
       with_items:
         - "show sys performance"
@@ -34,7 +34,7 @@
 
 
 
-#    - name: Sending message to room 
+#    - name: Sending message to room
 #      cisco_spark:
 #        recipient_type: roomId
 #        recipient_id: Y2lzY29zcGFyazovL3VzL1JPT00vZjViMWMwNDAtYmVjMi0xMWU4LWE2YjctN2IzZDA4NWRlMWU1

@@ -25,4 +25,4 @@
     - name: Sending hostname to room 
       office_365_connector_card:
         webhook: "{{ webhook_url_mandy }}"
-        message: " hostname "
+        text: " hostname "

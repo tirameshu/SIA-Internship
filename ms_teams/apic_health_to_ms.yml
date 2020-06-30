@@ -21,4 +21,4 @@
     - name: Sending message to room 
       office_365_connector_card:
         webhook: "{{ webhook_url_mandy }}"
-        message: "{{ hostvars['DUMMY_HOST']['controller_new'] }}"
+        text: "{{ hostvars['DUMMY_HOST']['controller_new'] }}"
