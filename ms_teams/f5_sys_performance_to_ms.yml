@@ -5,24 +5,32 @@
   tasks:
     - name: Show System Perfomance Usage
       raw: 
-#        "show sys performance"
-        "show sys hardware"
+        "{{ item }}"
+      with_items:
+        - "show sys performance"
+        - "show sys hardware"
       register: sys_output
-    - debug: var=sys_output.stdout_lines
+    - debug: var=sys_output
     
     - name: Register dummy host with variable
       add_host:
         name: "DUMMY_HOST"
-        sys_performance_new: "{{sys_output.stdout}}"
+        sys_performance: "{{sys_output.results[0].stdout_lines}}"
+        sys_hardware: "{{ sys_output.results[1].stdout_lines }}"
     
 - hosts: local_host
   connection: local
   gather_facts: False
   tasks:
-    - name: to ms teams
+    - name: sys perf to ms teams
       office_365_connector_card:
-        webhook: "{{ webhook_url_abhay }}"
-        text: "{{ hostvars['DUMMY_HOST']['sys_performance_new'] }}"
+        webhook: "{{ webhook_url_mandy}}"
+        text: "System Performance: \n {{ hostvars['DUMMY_HOST']['sys_performance'] }}"
+
+    - name: sys hardware to ms teams
+      office_365_connector_card:
+        webhook: "{{ webhook_url_mandy}}"
+        text: "System Hardware: \n {{ hostvars['DUMMY_HOST']['sys_hardware']}}"
 
 
 
