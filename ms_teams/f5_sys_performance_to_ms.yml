@@ -21,8 +21,8 @@
     - name: Register dummy host with variable
       add_host:
         name: "DUMMY_HOST"
-        sys_performance: "{{sys_output.results[0].stdout_lines}}"
-        sys_hardware: "{{ sys_output.results[1].stdout_lines }}"
+        sys_performance: "{{sys_output.stdout_lines}}"
+        sys_hardware: "{{ sys_output.stdout_lines }}"
 
 - hosts: local_host
   connection: local
