@@ -25,7 +25,7 @@
         sys_performance: "{{ sys_output.stdout_lines[0] | join('\n') }}"
         sys_hardware: "{{ sys_output.stdout_lines[1] | join('\n') }}"
 
-    - debug: var=sys_performance
+    - debug: var="{{ hostvars['DUMMY_HOST']['sys_performance'] }}"
 
 - hosts: local_host
   connection: local
