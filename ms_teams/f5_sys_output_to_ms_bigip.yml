@@ -1,0 +1,42 @@
+---
+- name: Obtain System Information with bigip_command
+  hosts: f5
+  connection: local
+  gather_facts: False
+
+  tasks:
+    - name: Get sys_output from device with bigip_command
+      bigip_command:
+        provider:
+          server: "{{ inventory_hostname }}"
+          user: "{{ ansible_user }}"
+          password: "{{ ansible_password }}"
+          validate_certs: no
+        commands:
+          - "show sys performance"
+          - "show sys hardware"
+      register: sys_output
+
+    - debug: var=sys_output
+
+    - name: Register dummy host with variable
+      add_host:
+        name: "DUMMY_HOST"
+        sys_performance: "{{ sys_output.stdout_lines[0] | join('\n') }}"
+        sys_hardware: "{{ sys_output.stdout_lines[1] | join('\n') }}"
+
+    - debug: var="{{ hostvars['DUMMY_HOST']['sys_performance'] }}"
+
+- hosts: local_host
+  connection: local
+  gather_facts: False
+  tasks:
+    - name: Sending sys perf to ms teams
+      office_365_connector_card:
+        webhook: "{{ webhook_url_mandy }}"
+        text: "{{ hostvars['DUMMY_HOST']['sys_performance'] }}"
+
+    - name: Sending sys hardware to ms teams
+      office_365_connector_card:
+        webhook: "{{ webhook_url_mandy }}"
+        text: " {{ hostvars['DUMMY_HOST']['sys_hardware'] }}"
