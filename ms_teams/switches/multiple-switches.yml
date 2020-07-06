@@ -1,0 +1,58 @@
+---
+- name: Obtaining Switch Information
+  hosts: switches
+  connection: local
+  gather_facts: False
+
+  tasks:
+    - name: Get info from switches
+      ios_command:
+        commands:
+          - sh processes cpu history
+          - sh ip int br
+          - sh int status
+      register: sys_output
+
+    - debug: var=hostvars["{{ item }}"].sys_output.stdout_lines
+      with_items: "{{ groups['switches'] }}"
+
+    - name: Register switch outputs with variable
+      add_host:
+        name: "{{ item }}" 
+        p-cpu-history: "{{ hostvars[ item ].sys_output.stdout_lines[0] | join('\n') }}"
+        ip-int-br: "{{ hostvars[item ].sys_output.stdout_lines[1] | join('\n') }}"
+        int-status: "{{ hostvars[item ].sys_output.stdout_lines[2] | join('\n') }}"
+      with_items: "{{ groups['switches'] }}"
+
+- hosts: localhost
+  connection: local
+  gather_facts: False
+ 
+  vars_files:
+  - vars.yml
+  
+  tasks:
+    - name: Switch 1 processes cpu history
+      cisco_spark:
+        recipient_type: roomId
+        recipient_id: "{{ recipient_id }}"
+        personal_token: "{{ personal_token }}"
+        message_type: text
+        message: " ------------ MANDY Switch 1 Processes CPU History: ------------ \n \n {{ hostvars['DUMMY_HOST']['p-cpu-history']}} \n"
+
+
+    - name: Switch 1 ip int br
+      cisco_spark:
+        recipient_type: roomId
+        recipient_id: "{{ recipient_id }}"
+        personal_token: "{{ personal_token }}"
+        message_type: text
+        message: " ------------ MANDY Switch 1 IP Interface Brief: ------------ \n \n {{ hostvars['DUMMY_HOST']['ip-int-br']}} \n"
+
+    - name: Switch 1 int status
+      cisco_spark:
+        recipient_type: roomId
+        recipient_id: "{{ recipient_id }}"
+        personal_token: "{{ personal_token }}"
+        message_type: text
+        message: " ------------ MANDY Switch 1 Interface Status: ------------ \n \n {{ hostvars['DUMMY_HOST']['int-status']}} \n"
