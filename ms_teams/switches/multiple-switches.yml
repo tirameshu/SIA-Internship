@@ -19,9 +19,12 @@
     - name: Register switch outputs with variable
       add_host:
         name: "{{ item }}" 
-        p-cpu-history: "{{ hostvars[ item ].sys_output.stdout_lines[0] | join('\n') }}"
-        ip-int-br: "{{ hostvars[item ].sys_output.stdout_lines[1] | join('\n') }}"
-        int-status: "{{ hostvars[item ].sys_output.stdout_lines[2] | join('\n') }}"
+        p_cpu_history: " ------------ MANDY {{ item }} Processes CPU History: ------------ \n \n {{ hostvars[item].sys_output.stdout_lines[0] | join('\n') }}"
+        ip_int_br: " \n ------------ MANDY {{ item }} IP Interface Brief: ------------ \n \n {{ hostvars[item].sys_output.stdout_lines[1] | join('\n') }}"
+        int_status: " \n ------------ MANDY {{ item }} Interface Status: ------------ \n \n {{ hostvars[item].sys_output.stdout_lines[2] | join('\n') }}"
+      with_items: "{{ groups['switches'] }}"
+
+    - debug: var=hostvars["{{ item }}"]['p_cpu_history']
       with_items: "{{ groups['switches'] }}"
 
 - hosts: localhost
@@ -32,27 +35,11 @@
   - vars.yml
   
   tasks:
-    - name: Switch 1 processes cpu history
+    - name: Switch Outputs
       cisco_spark:
         recipient_type: roomId
         recipient_id: "{{ recipient_id }}"
         personal_token: "{{ personal_token }}"
         message_type: text
-        message: " ------------ MANDY Switch 1 Processes CPU History: ------------ \n \n {{ hostvars['DUMMY_HOST']['p-cpu-history']}} \n"
-
-
-    - name: Switch 1 ip int br
-      cisco_spark:
-        recipient_type: roomId
-        recipient_id: "{{ recipient_id }}"
-        personal_token: "{{ personal_token }}"
-        message_type: text
-        message: " ------------ MANDY Switch 1 IP Interface Brief: ------------ \n \n {{ hostvars['DUMMY_HOST']['ip-int-br']}} \n"
-
-    - name: Switch 1 int status
-      cisco_spark:
-        recipient_type: roomId
-        recipient_id: "{{ recipient_id }}"
-        personal_token: "{{ personal_token }}"
-        message_type: text
-        message: " ------------ MANDY Switch 1 Interface Status: ------------ \n \n {{ hostvars['DUMMY_HOST']['int-status']}} \n"
+        message: " {{ hostvars[item]['p_cpu_history'] }} , {{ hostvars[item]['ip_int_br'] }}, {{ hostvars[item]['int_status'] }} | join('\n \n \n') "
+      with_items: "{{ groups['switches'] }}"
