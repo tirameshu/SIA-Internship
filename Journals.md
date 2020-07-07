@@ -235,3 +235,4 @@ Yes
           `with_items: "{{ groups['all'] }}"` is a nested loop. Each `inventory_host` --> each `host` in `all` --> `print(hostvars[host]`.
 - `add_host`: does NOT automatically loop for all hosts.
     - `inventory_hostname` == first host.
+- use `serial: 1` to ensure sequential execution **host by host**.
