@@ -224,3 +224,14 @@ Yes
 
 ### Raw
 - To run multiple `raw` commands, pass them together under a single variable "{{ commands }}"
+
+# 7 July
+## Learnings
+### Ansible
+- `debug` automatically runs for all hosts
+    - `inventory_hostname` changes to match each current host it is debugging.
+        - `var=hostvars["{{ inventory_hostname }}"]` loops through all hosts and prints once from each host.
+        - `var=hostvars["{{ item }}"]`
+          `with_items: "{{ groups['all'] }}"` is a nested loop. Each `inventory_host` --> each `host` in `all` --> `print(hostvars[host]`.
+- `add_host`: does NOT automatically loop for all hosts.
+    - `inventory_hostname` == first host.
