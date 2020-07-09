@@ -1,0 +1,19 @@
+---
+- name: Configure Switches via File
+  hosts: switches
+  gather_facts: no
+  connection: local
+  serial: 1
+
+  tasks:
+    - name: Add VLANs to Switches
+      ios_config:
+        src: vlans.cfg
+
+    - name: sh vlan br
+      ios_command:
+        commands:
+          - sh vlan br
+      register: output
+
+    - debug: var=output.stdout_lines
