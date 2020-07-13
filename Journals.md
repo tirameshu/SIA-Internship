@@ -236,3 +236,14 @@ Yes
 - `add_host`: does NOT automatically loop for all hosts.
     - `inventory_hostname` == first host.
 - use `serial: 1` to ensure sequential execution **host by host**.
+
+# 13 July
+## Learnings
+- My switch has Linux software: is an emulator
+- Cisco is actually Unix based
+- Wrote script for backup
+
+## To Do
+- Using `sh logs` check for bgp/ ospf/ power/ int/ module down
+- Ping neighbours from host switch to confirm, regardless of logs
+- Send health status to chat, excluding the actual logs
