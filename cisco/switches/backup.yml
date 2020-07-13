@@ -1,0 +1,11 @@
+---
+- name: Back up switch config
+  hosts: switches
+  connection: local
+  gather_facts: no
+
+  tasks:
+    - name: Store config
+      ios_config:
+        backup: yes
+      register: config_backup
