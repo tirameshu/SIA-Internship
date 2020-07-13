@@ -1,0 +1,26 @@
+---
+- name: Generate Report for Switches
+  hosts: switches
+  gather_facts: no
+  connection: local
+  serial: 1
+
+  tasks:
+    - name: Obtain VLAN info
+      ios_command:
+        commands:
+          - sh vlan br
+      register: vlan_output
+
+    - name: Ensure "reports" folder exists
+      run_once: yes
+      file:
+        name: reports
+        state: directory
+
+    - name: Render Report 
+      template:
+        src: report_template.j2
+        dest: reports/{{ inventory_hostname }}.md
+      with_items:
+        - "{{ vlan_output }}"
