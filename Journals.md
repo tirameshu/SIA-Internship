@@ -247,3 +247,19 @@ Yes
 - Using `sh logs` check for bgp/ ospf/ power/ int/ module down
 - Ping neighbours from host switch to confirm, regardless of logs
 - Send health status to chat, excluding the actual logs
+
+# 14 July
+## Learnings
+### Load Balancer
+- distributes connections among servers available
+- when a connection is made to an application, the connection is actually made to the load balancer, which then decides the server to connect to.
+
+### Pool
+- state: present/ absent
+- snat: to protect server from internet
+- lb method: round robin, cookie based, etc
+- adding pool member: IP-addr based, fqdn (uses domain name, following hierarchy in DNS)
+
+### Devices on cloud (AWS)
+- management: routed through data center, using jumphost (under VPN) -> cloud
+- client traffic: direct connection to lb on cloud
