@@ -263,3 +263,8 @@ Yes
 ### Devices on cloud (AWS)
 - management: routed through data center, using jumphost (under VPN) -> cloud
 - client traffic: direct connection to lb on cloud
+
+# 16 July
+## Presentation
+- raw commands only can run 1 command
+- we then used bipip commands to run multiple commands
