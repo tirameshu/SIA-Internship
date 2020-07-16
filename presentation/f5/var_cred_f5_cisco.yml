@@ -1,0 +1,71 @@
+---
+- name: Obtain System Information with bigip_command
+  hosts: f5
+  connection: local
+  gather_facts: False
+
+  tasks:
+    - name: Get sys_output from device with bigip_command
+      bigip_command:
+        provider:
+          server: "{{ inventory_hostname }}"
+          user: "{{ ansible_user }}"
+          password: "{{ ansible_password }}"
+          validate_certs: no
+        commands:
+          - "show sys hardware"
+          - "show sys cpu"
+          - "show sys ha-mirror"
+          - "show sys performance"
+      register: sys_output
+
+    - debug: var=sys_output
+
+    - name: Register dummy host with variable
+      add_host:
+        name: "DUMMY_HOST"
+        sys_hardware: "{{ sys_output.stdout[0] }}"
+        sys_cpu: "{{ sys_output.stdout[1] }}"
+        sys_ha-mirror: "{{ sys_output.stdout[2] }}"
+        sys_performance: "{{ sys_output.stdout[3] }}"
+
+- hosts: localhost 
+  connection: local
+  gather_facts: False
+
+  vars_files:
+    - id_token.yml
+
+  tasks:
+    - name: Sending sys hardware to cisco webex space
+      cisco_spark:
+        recipient_type: roomId
+        recipient_id: "{{ recipient_id }}" 
+        personal_token: "{{ personal_token }}" 
+        message_type: text
+        message: " ------------ System Hardware: ------------ \n {{ hostvars['DUMMY_HOST']['sys_hardware'] }}"
+
+    - name: Sending sys CPU to cisco webex space
+      cisco_spark:
+        recipient_type: roomId
+        recipient_id: "{{ recipient_id }}" 
+        personal_token: "{{ personal_token }}" 
+        message_type: text
+        message: "\n \n -------------  System CPU: ----------- \n {{ hostvars['DUMMY_HOST']['sys_cpu'] }}"
+
+    - name: Sending sys ha-mirror to cisco webex space
+      cisco_spark:
+        recipient_type: roomId
+        recipient_id: "{{ recipient_id }}" 
+        personal_token: "{{ personal_token }}" 
+        message_type: text
+        message: "\n \n -------------  System Ha-Mirror: ----------- \n {{ hostvars['DUMMY_HOST']['sys_ha-mirror'] }}"
+
+    - name: Sending sys performance to cisco webex space
+      cisco_spark:
+        recipient_type: roomId
+        recipient_id: "{{ recipient_id }}" 
+        personal_token: "{{ personal_token }}" 
+        message_type: text
+        message: "\n \n -------------  System Performance: ----------- \n {{ hostvars['DUMMY_HOST']['sys_performance'] }}"
+
