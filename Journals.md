@@ -236,6 +236,7 @@ Yes
 - `add_host`: does NOT automatically loop for all hosts.
     - `inventory_hostname` == first host.
 - use `serial: 1` to ensure sequential execution **host by host**.
+    - when this is used, `hostvars[item]` `with_items: "{{ groups['all'] }}"` results in undefined variable for hosts other than the first one.
 
 # 13 July
 ## Learnings
