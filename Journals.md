@@ -268,3 +268,15 @@ Yes
 ## Presentation
 - raw commands only can run 1 command
 - we then used bipip commands to run multiple commands
+- whether sending the msg out shld be a separate task
+- think from client pov, might be better to put everything under 1 task just to ensure sequential execution
+- readability of playbooks only matter to developers, and to the client only the output matters
+- make sure everything is easily accessible, and directory only contains what's needed for presentation
+- test multiple times first!!
+- explanations should not be too technical; what matters more is performance: what does it do, what's the benefit of using it
+    - managers don't care about the actual code
+
+- our purpose: show that we can run multiple commands on multiple devices -> playbook efficient!!
+    - highlight that if we only write one command in one playbook, we have to write like 25 playbooks for 5 commands on 5 devices
+    - easier to manage if we consolidate everything into 1 playbook
+    - space efficient to use fewer playbooks as well
