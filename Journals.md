@@ -237,6 +237,7 @@ Yes
     - `inventory_hostname` == first host.
 - use `serial: 1` to ensure sequential execution **host by host**.
     - when this is used, `hostvars[item]` `with_items: "{{ groups['all'] }}"` results in undefined variable for hosts other than the first one.
+    - must use `hostvars[inventory_hostname]` instead
 
 # 13 July
 ## Learnings
