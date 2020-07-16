@@ -1,0 +1,26 @@
+---
+- name: Check if any part is down
+  hosts: switches
+  connection: local
+  gather_facts: no
+  
+  vars_files:
+    - credentials.yml
+
+  tasks:
+    - name: obtain date
+      ios_command:
+        commands:
+          - sh clock
+      register: datetime
+
+    - name: obtain logs
+      ios_command:
+        commands:
+          - " sh log | include {{ '  '.join(datetime.stdout_lines[0][0].split(' ')[3:5]) }}"
+      register: switch_log
+
+    - debug: var=switch_log.stdout_lines[0][0]
+
+    - debug:
+        msg: "{% if switch_log.stdout_lines[0][0] == '' %} No log for today! {% else %} switch_log.stdout_lines[0] | join('\n') {% endif %}"

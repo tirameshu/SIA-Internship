@@ -1,0 +1,26 @@
+---
+- name: Obtaining Switch Information
+  hosts: switches
+  connection: local
+  gather_facts: False
+
+  tasks:
+    - name: Get info from switches
+      ios_command:
+        commands:
+          - sh int status
+      register: sys_output
+
+    - debug: var=hostvars["{{ inventory_hostname }}"].sys_output.stdout_lines
+      # with_items: "{{ groups['switches'] }}"
+
+    # - debug: var=hostvars['10.180.0.121'].sys_output.stdout_lines
+
+    - name: Register switch outputs with variable
+      add_host:
+        name: "{{ item }}" 
+        # p_cpu_history: " ------------ MANDY {{ item }} Processes CPU History: ------------ \n \n {{ hostvars[item].sys_output.stdout_lines[0] | join('\n') }}"
+        # ip_int_br: " \n ------------ MANDY {{ item }} IP Interface Brief: ------------ \n \n {{ hostvars[item].sys_output.stdout_lines[1] | join('\n') }}"
+        int_status: " \n ------------ MANDY {{ item }} Interface Status: ------------ \n \n {{ hostvars[item].sys_output.stdout_lines[0] | join('\n') }}"
+      with_items: "{{ groups['switches'] }}"
+

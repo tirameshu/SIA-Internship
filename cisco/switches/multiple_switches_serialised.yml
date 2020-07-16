@@ -1,6 +1,7 @@
 ---
 - name: Obtaining Switch Information
   hosts: switches
+  serial: 1
   connection: local
   gather_facts: False
 
@@ -13,19 +14,14 @@
           - sh int status
       register: sys_output
 
-    - debug: var=hostvars["{{ item }}"].sys_output.stdout_lines
-      with_items: "{{ groups['switches'] }}"
+    - debug: var=hostvars["{{ inventory_hostname }}"].sys_output.stdout_lines
 
     - name: Register switch outputs with variable
       add_host:
-        name: "{{ item }}" 
-        p_cpu_history: " ------------ MANDY {{ item }} Processes CPU History: ------------ \n \n {{ hostvars[item].sys_output.stdout_lines[0] | join('\n') }}"
-        ip_int_br: " \n ------------ MANDY {{ item }} IP Interface Brief: ------------ \n \n {{ hostvars[item].sys_output.stdout_lines[1] | join('\n') }}"
-        int_status: " \n ------------ MANDY {{ item }} Interface Status: ------------ \n \n {{ hostvars[item].sys_output.stdout_lines[2] | join('\n') }}"
-      with_items: "{{ groups['switches'] }}"
-
-    - debug: var=hostvars["{{ item }}"]['p_cpu_history']
-      with_items: "{{ groups['switches'] }}"
+        name: "{{ inventory_hostname }}" 
+        p_cpu_history: " ------------ MANDY {{ inventory_hostname }} Processes CPU History: ------------ \n \n {{ hostvars[inventory_hostname].sys_output.stdout_lines[0] | join('\n') }}"
+        ip_int_br: " \n ------------ MANDY {{ inventory_hostname }} IP Interface Brief: ------------ \n \n {{ hostvars[inventory_hostname].sys_output.stdout_lines[1] | join('\n') }}"
+        int_status: " \n ------------ MANDY {{ inventory_hostname }} Interface Status: ------------ \n \n {{ hostvars[inventory_hostname].sys_output.stdout_lines[2] | join('\n') }}"
 
 - hosts: localhost
   connection: local
@@ -42,5 +38,6 @@
         personal_token: "{{ personal_token }}"
         message_type: text
         message: " {{ hostvars[item]['p_cpu_history'] }} , {{ hostvars[item]['ip_int_br'] }}, {{ hostvars[item]['int_status'] }} | join('\n \n \n') "
+        # message: " {{ hostvars[item]['ip_int_br'] }} | join('\n \n \n') "
       with_items: "{{ groups['switches'] }}"
 

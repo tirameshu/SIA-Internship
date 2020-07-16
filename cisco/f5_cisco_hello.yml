@@ -1,0 +1,15 @@
+---
+
+- hosts: localhost
+  connection: local
+  gather_facts: False
+  tasks:
+    - name: Sending sys perf to cisco webex space
+      cisco_spark:
+        recipient_type: roomId
+        recipient_id: Y2lzY29zcGFyazovL3VzL1JPT00vMGZhYjZhNDAtYmIzZS0xMWVhLWI2Y2YtNmY2MWU5ZmYyZDZi
+        message_type: text
+        personal_token: YmVlNmE0MzEtN2JiYS00ZDExLWE2M2MtZDllNzU0OGMyNWM3ZWRlNGFhM2ItNzQw_PF84_c535a0c6-e613-4525-aa7e-58d962557c36
+        message: "hello"
+
+

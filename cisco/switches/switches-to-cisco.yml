@@ -27,7 +27,7 @@
   gather_facts: False
 
   vars_files:
-  - vars.yml
+  - credentials.yml
 
   tasks:
     - name: Switch 1 processes cpu history
@@ -53,3 +53,4 @@
         personal_token: "{{ personal_token }}"
         message_type: text
         message: " \n ------------ MANDY Switch 1 Interface Status: ------------ \n \n {{ hostvars['DUMMY_HOST']['int-status']}} \n"
+

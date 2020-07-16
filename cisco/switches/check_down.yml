@@ -1,0 +1,29 @@
+---
+- name: Check if any part is down
+  hosts: switches
+  connection: local
+  gather_facts: no
+  
+  vars_files:
+    - credentials.yml
+
+  tasks:
+    - name: obtain logs
+      ios_command:
+        commands:
+          - sh log | include Jul 6 | down
+      register: switch_log
+
+    - debug: var=switch_log.stdout_lines[0]
+
+    - debug:
+        msg: "{% for line in switch_log.stdout_lines[0] if '*Jul  6' in line and 'down' in line %} {{ line }} {% else %} No down in logs! {% endfor %}"
+
+    - name: send to cisco
+      cisco_spark:
+        recipient_type: roomId
+        recipient_id: "{{ recipient_id }}"
+        personal_token: "{{ personal_token }}"
+        message_type: text
+        message: " \n \n ---------- {{ inventory_hostname }} ----------- \n {{ switch_log.stdout_lines[0] | join('\n') }}"
+      delegate_to: localhost

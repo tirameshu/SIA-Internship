@@ -1,0 +1,17 @@
+---
+
+- hosts: localhost 
+  connection: local
+  gather_facts: False
+
+#  vars_files:
+#  - id_tocken.yml
+
+  tasks:
+    - name: Sending sys hardware to cisco webex space
+      cisco_spark:
+        recipient_type: roomId
+        recipient_id: "{{ id }}"
+        personal_token: "{{ token }}" 
+        message_type: text
+        message: "hello"
