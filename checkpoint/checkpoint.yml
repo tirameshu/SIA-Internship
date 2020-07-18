@@ -1,0 +1,48 @@
+---
+- name: Using Checkpoint
+  hosts: checkpoint
+  connection: local
+  gather_facts: no
+
+  vars_files:
+    - host_vars.yml
+
+  tasks:
+  - name: Login
+    check_point_mgmt:
+      command: login
+      parameters:
+        username: "{{ ansible_user }}"
+        password: "{{ ansible_password }}"
+        management: "{{ mgmt_server }}"
+      fingerprint: "{{ fingerprint }}" # hostfile
+    register: login_response # persistent connection
+
+    # - name: Add host
+    #   check_point_mgmt: 
+    #     command: add-host
+    #     parameters:
+    #       name: host1
+    #       ip-address: "{{ host1_ip }}"
+    #     session-data: "{{ login_response }}"
+
+    - name: GET cphaprob state
+      check_point_mgmt:
+        command: cphaprob-state
+        session-data: "{{ login_response }}"
+
+    - name: GET uptime
+      check_point_mgmt:
+        command: show-uptime
+        session-data: "{{ login_response }}"
+    
+    - name: GET Firewall Connections
+      check_point_mgmt:
+        command: fw-tab -s -t connections
+        parameters: # for flags?
+        session-data: "{{ login_response }}"
+
+    - name: GET cpstat
+      check_point_mgmt:
+        command: cpstat-os -f cpu
+        session-data: "{{ login_response }}"
