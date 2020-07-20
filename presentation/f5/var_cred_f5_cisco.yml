@@ -13,10 +13,10 @@
           password: "{{ ansible_password }}"
           validate_certs: no
         commands:
-          - "show sys hardware"
-          - "show sys cpu"
-          - "show sys ha-mirror"
-          - "show sys performance"
+          - show sys hardware
+          - show sys cpu
+          - show sys ha-mirror
+          - show sys performance
       register: sys_output
 
     - debug: var=sys_output
@@ -34,7 +34,7 @@
   gather_facts: False
 
   vars_files:
-    - id_token.yml
+    - credentials.yml
 
   tasks:
     - name: Sending sys hardware to cisco webex space
