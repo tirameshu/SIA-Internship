@@ -17,5 +17,6 @@ _Fetches information from switches and stores in variables._
         
             first part of the information retrieved, stored with header to differentiate it from other parts. Actual content follows after two newlines.
         
-        - `sys_output` is already stored under both current running host, accessible with `hostvars[inventory_hostname].sys_output`.
+            -  Actual content in `sys_output`, which is already stored under current running host, accessible with `hostvars[inventory_hostname].sys_output`.
+            - `stdout_lines` is a list of strings, joined with `\n` so that each string appears on a new line.
 
