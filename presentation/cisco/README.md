@@ -20,3 +20,19 @@ _Fetches information from switches and stores in variables._
             -  Actual content in `sys_output`, which is already stored under current running host, accessible with `hostvars[inventory_hostname].sys_output`.
             - `stdout_lines` is a list of strings, joined with `\n` so that each string appears on a new line.
 
+After the above tasks are completed for switch 1, they are repeated for switch 2.
+
+## Play 2
+_Sends information to Cisco Webex Teams_
+
+### Preamble
+- `hosts` changed to localhost now, as the information is sent out from localhost and not the switches.
+- `vars_files` file containing variables that will be accessed in this play.
+    - `recipient_id`
+    - `personal token`
+- `credentials.yml` file in current directory containing credentials to connect to the desired Cisco Webex Teams group.
+
+### Tasks
+- [`cisco_sparks`](https://docs.ansible.com/ansible/latest/modules/cisco_spark_module.html) module to connect to Cisco Webex Teams
+    - variables are to be in the format `"{{ var_name }}"
+- `message: " {{ hostvars[item]['p_cpu_history'] }} , {{ hostvars[item]['ip_int_br'] }}, {{ hostvars[item]['int_status'] }} | join('\n \n \n') "`
