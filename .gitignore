@@ -1,4 +1,4 @@
 host*
 credential*
 hardcode*
-*/roles/vars/*
+*/roles/*/vars/*
