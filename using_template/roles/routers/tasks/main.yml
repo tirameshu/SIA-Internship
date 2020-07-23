@@ -1,6 +1,0 @@
----
-- name: Configure switches
-  template: 
-    src=template.j2
-    dest={{ item.hostname }} # functions to call
-  with_items: "{{ routers }}" # in vars.yml
