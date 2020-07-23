@@ -1,6 +1,6 @@
 # Script Structure
 ## Play 1
-_Fetches information from switches and stores in variables._
+*Fetches information from switches and stores in variables.*
 
 ### Preamble
 - `hosts`: switches play will be run on hosts under the group switches, as stated in the host file hosts in this directory.
@@ -23,7 +23,7 @@ _Fetches information from switches and stores in variables._
 After the above tasks are completed for switch 1, they are repeated for switch 2.
 
 ## Play 2
-_Sends information to Cisco Webex Teams_
+*Sends information to Cisco Webex Teams*
 
 ### Preamble
 - `hosts` changed to localhost now, as the information is sent out from localhost and not the switches.
@@ -34,5 +34,7 @@ _Sends information to Cisco Webex Teams_
 
 ### Tasks
 - [`cisco_sparks`](https://docs.ansible.com/ansible/latest/modules/cisco_spark_module.html) module to connect to Cisco Webex Teams
-    - variables are to be in the format `"{{ var_name }}"
+    - variables are to be in the format `"{{ var_name }}"`
+- `with_items: "{{ groups['switches'] }}"` loops through *all hosts* in group `switches` in hostfile.
 - `message: " {{ hostvars[item]['p_cpu_history'] }} , {{ hostvars[item]['ip_int_br'] }}, {{ hostvars[item]['int_status'] }} | join('\n \n \n') "`
+    retrieves the three parts of output stored under current host in loop, joins them with newlines.
