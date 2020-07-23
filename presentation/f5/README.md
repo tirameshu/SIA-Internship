@@ -20,7 +20,7 @@
 
 #### Task 3
 - `add_host` constructs a host to store corresponding information fetched, allowing it to be accessible in other plays in the playbook. As there is only 1 device in this case, a single host `DUMMY HOST` is created.
-    - `sys_hardware: "{{ sys_output.stdout[0] }}"` first part of the information retrieved.
+    - `sys_hardware: "{{ sys_output.stdout[0] }}"` output of first command
         - `stdout` is a nested list. The first layer is a list of lists, where 1 list is the output of 1 command. The second layer is a list containing the output, already joined with `\n`.
 
 After the above tasks are completed for switch 1, they are repeated for switch 2.
@@ -36,7 +36,13 @@ After the above tasks are completed for switch 1, they are repeated for switch 2
 - `credentials.yml` file in current directory containing credentials to connect to the desired Cisco Webex Teams group.
 
 ### Tasks
+
+#### Task 1
+*`sys_hardware`*
+
 - [`cisco_sparks`](https://docs.ansible.com/ansible/latest/modules/cisco_spark_module.html) module to connect to Cisco Webex Teams
     - variables are to be in the format `"{{ var_name }}"`
 - `message: " ------------ System Hardware: ------------ \n {{ hostvars['DUMMY_HOST']['sys_hardware'] }}"`
     retrieves `sys_hardware` output stored under the `hostvars` of the dummy host.
+    
+Tasks repeat in a similar fashion for the other outputs.
