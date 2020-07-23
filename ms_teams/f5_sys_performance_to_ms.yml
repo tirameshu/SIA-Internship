@@ -32,12 +32,3 @@
         webhook: "{{ webhook_url_mandy}}"
         text: "System Hardware: \n {{ hostvars['DUMMY_HOST']['sys_hardware']}}"
 
-
-
-#    - name: Sending message to room
-#      cisco_spark:
-#        recipient_type: roomId
-#        recipient_id: Y2lzY29zcGFyazovL3VzL1JPT00vZjViMWMwNDAtYmVjMi0xMWU4LWE2YjctN2IzZDA4NWRlMWU1
-#        message_type: text
-#        personal_token: ZWE3MTEzOTctMjZiZS00YWMxLWIwNjctMjcxODk4Mzk4NmFiNTczODE5NDItMGQy_PF84_c535a0c6-e613-4525-aa7e-58d962557c36
-#        message: "{{ hostvars['DUMMY_HOST']['sys_performance_new'] }}"
