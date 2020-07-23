@@ -3,7 +3,7 @@
 *Fetches information from switches and stores in variables.*
 
 ### Preamble
-- `hosts`: switches play will be run on hosts under the group switches, as stated in the host file hosts in this directory.
+- `hosts: switches` play will be run on hosts under the group switches, as stated in the host file hosts in this directory.
 - `serial: 1` play will run on 1 switch at a time.
 
 ### Tasks
