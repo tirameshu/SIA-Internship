@@ -1,0 +1,23 @@
+---
+- name: notifying cisco
+  hosts: localhost
+  connection: local
+  gather_facts: no 
+
+  vars_files:
+    - credentials.yml
+
+  handlers:
+    - name: send hi to cisco
+      cisco_spark:
+        recipient_type: roomId
+        recipient_id: "{{ recipient_id }}"
+        personal_token: "{{ personal_token }}"
+        message_type: text
+        message: "hi im notifying you"
+      listen: "sending msg to cisco"
+
+  tasks:
+    - name: send test mg to cisco with handler
+      command: echo "sending msg to cisco" # task requires existence of at least 1 action
+      notify: "sending msg to cisco"
