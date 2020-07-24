@@ -282,3 +282,31 @@ Yes
     - highlight that if we only write one command in one playbook, we have to write like 25 playbooks for 5 commands on 5 devices
     - easier to manage if we consolidate everything into 1 playbook
     - space efficient to use fewer playbooks as well
+    
+# 24 July
+## Automation Pipeline
+1. Users must work only on existing playbooks, and only modify the variable file to apply the playbook to the actual host.
+    - One specific playbook for one specific use case.
+    - User only has access to Development branch.
+    - Modification reviewed by NTT Team. Each member specialises in a specific type of host (eg F5, firewall, etc)
+    - SIA then has the final authority for merging Dev to Prod branch.
+    - Takes about 3 days, to further reduce delay, there will be pre-approved playbooks/ use cases. Other parts of pipeline automatically triggered when users requests for relevant pull requests.
+        - 3 --> 1/2 day.
+    
+2. Bitbucket sends webhook to Jenkins
+
+3. Jenkins calls Ansible Tower
+    - Ansible Tower fetches playbook from Bitbucket (already integrated).
+    - Triggers template to start job --> pushes changes onto devices.
+    
+## BitBucket Integration with Ansible Tower
+- Ansible Tower makes API call to the BitBucker.
+    - If BitBucket account is private, `Credential` is needed for connection.
+    - BitBucket link provided in `Project --> SCM URL`.
+- Specify branch to pull from.
+- Refresh on update to always update the template.
+
+### Templates
+- Only playbooks containing `hosts` will be visible under `Playbook`.
+- `Credential` here is to connect to device and NOT the SCM.
+- No direct integration of webhook between BitBucket and Ansible, so need Jenkins. Then can `enable webhook` under `Options`.
