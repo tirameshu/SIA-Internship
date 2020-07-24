@@ -310,3 +310,18 @@ Yes
 - Only playbooks containing `hosts` will be visible under `Playbook`.
 - `Credential` here is to connect to device and NOT the SCM.
 - No direct integration of webhook between BitBucket and Ansible, so need Jenkins. Then can `enable webhook` under `Options`.
+
+## Jenkins
+- Specify SCM URL and credentials under Source Code Management.
+- Install Ansible, BitBucket plugin to detect changes in BitBucket.
+- Connect to Ansible under `Build`, providing Ansible credentials.
+    - Template can be `job` or `workflow`.
+        - Workflow is a if-else sequence of template-triggering.
+    - Template ID is the specific template name on Ansible.
+    
+### Master-Slave
+- Master distributes builds to slaves.
+    - Master managed by the Server Team in SIA.
+- Slaves themselves are servers, but cannot install any **plugin/ credentials** on slaves.
+    - Can only configure build, pipeline, etc.
+    - Difficult to manage security with distributed system, hard to ensure patching etc., so it's managed centrally and gives permission individually on a need basis.
