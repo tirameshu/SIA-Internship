@@ -35,6 +35,6 @@
         recipient_id: "{{ recipient_id }}"
         personal_token: "{{ personal_token }}"
         message_type: text
-        message: " {{ hostvars[inventory_hostname]['p_cpu_history'] }} , {{ hostvars[inventory_hostname]['ip_int_br'] }}, {{ hostvars[inventory_hostname]['int_status'] }} | join('\n \n \n') "
+        message: " {{ hostvars[item]['p_cpu_history'] }} , {{ hostvars[item]['ip_int_br'] }}, {{ hostvars[item]['int_status'] }} | join('\n \n \n') "
         # message: " {{ hostvars[item]['ip_int_br'] }} | join('\n \n \n') "
       with_items: "{{ groups['switches'] }}"
