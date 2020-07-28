@@ -1,6 +1,6 @@
 ---
 - name: Obtaining Switch Information
-  hosts: all
+  hosts: switches
   serial: 1
   connection: local
   gather_facts: False
@@ -23,6 +23,12 @@
         ip_int_br: " \n ------------ MANDY {{ inventory_hostname }} IP Interface Brief: ------------ \n \n {{ hostvars[inventory_hostname].sys_output.stdout_lines[1] | join('\n') }}"
         int_status: " \n ------------ MANDY {{ inventory_hostname }} Interface Status: ------------ \n \n {{ hostvars[inventory_hostname].sys_output.stdout_lines[2] | join('\n') }}"
   
+- name: Output to Cisco
+  hosts: localhost
+  connection: local
+  gather_facts: False
+  
+  tasks:
     - name: Switch Outputs
       cisco_spark:
         recipient_type: roomId
@@ -31,6 +37,4 @@
         message_type: text
         message: " {{ hostvars[inventory_hostname]['p_cpu_history'] }} , {{ hostvars[inventory_hostname]['ip_int_br'] }}, {{ hostvars[inventory_hostname]['int_status'] }} | join('\n \n \n') "
         # message: " {{ hostvars[item]['ip_int_br'] }} | join('\n \n \n') "
-      # with_items: "{{ groups['switches'] }}"
-      delegate_to: localhost
-
+      with_items: "{{ groups['switches'] }}"
