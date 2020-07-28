@@ -1,6 +1,6 @@
 ---
 - name: Obtaining Switch Information
-  hosts: switches
+  hosts: all
   serial: 1
   connection: local
   gather_facts: False
