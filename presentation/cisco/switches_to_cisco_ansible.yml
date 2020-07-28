@@ -26,9 +26,6 @@
 - hosts: localhost
   connection: local
   gather_facts: False
- 
-  vars_files:
-  - credentials.yml
   
   tasks:
     - name: Switch Outputs
