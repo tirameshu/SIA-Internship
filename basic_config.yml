@@ -1,0 +1,24 @@
+---
+- name: Configurations for new switches
+  hosts: new_switches
+  connection: local
+  gather_facts: false
+  
+  vars_files:
+  - vars.yml
+
+  tasks:
+    - name: basic configurations
+      ios_command:
+        commands:
+          - conf t
+          - hostname "{{ item.hostname }}"
+          - int vlan "{{ item.vlan }}"
+          - no shut
+          - line vty 0 4
+          - transport input all
+          - login local
+          - ip domain-name "{{ item.domain }}"
+          - crypto key generate rsa
+      with_items:
+      - "{{ switch2 }}"
